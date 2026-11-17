@@ -1,0 +1,52 @@
+package com.ong.acolhepatinhas.api.security.enums;
+
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
+public enum Role {
+        ADMIN(Set.of(
+                        Permission.USER_READ,
+                        Permission.USER_VERIFY,
+                        Permission.ANIMAL_READ,
+                        Permission.ANIMAL_CREATE,
+                        Permission.ANIMAL_EDIT,
+                        Permission.ANIMAL_REMOVE,
+                        Permission.ANIMAL_REFERENCE_MANAGE,
+                        Permission.VETERINARY_READ,
+                        Permission.VETERINARY_ASSIGN,
+                        Permission.VETERINARY_MANAGE,
+
+                        Permission.POST_READ,
+                        Permission.POST_CREATE,
+                        Permission.POST_EDIT,
+                        Permission.POST_REMOVE,
+
+                        Permission.FOSTERHOME_READ,
+                        Permission.FOSTERHOME_CREATE,
+                        Permission.FOSTERHOME_EDIT,
+                        Permission.FOSTERHOME_REMOVE,
+
+                        Permission.REPORT_READ,
+                        Permission.REPORT_CREATE,
+                        Permission.REPORT_EDIT));
+
+        private final Set<Permission> permissions;
+
+        Role(Set<Permission> permissions) {
+                this.permissions = permissions;
+        }
+
+        public List<SimpleGrantedAuthority> getAuthorities() {
+
+                List<SimpleGrantedAuthority> authorities = permissions.stream()
+                                .map(permission -> new SimpleGrantedAuthority(permission.getPermission()))
+                                .collect(Collectors.toList());
+
+                authorities.add(new SimpleGrantedAuthority("ROLE_" + this.name()));
+
+                return authorities;
+        }
+}

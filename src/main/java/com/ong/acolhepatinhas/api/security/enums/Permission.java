@@ -1,0 +1,42 @@
+package com.ong.acolhepatinhas.api.security.enums;
+
+public enum Permission {
+
+    USER_READ("user:read"),
+    USER_VERIFY("user:verify"),
+
+    ANIMAL_READ("animal:read"),
+    ANIMAL_CREATE("animal:create"),
+    ANIMAL_EDIT("animal:edit"),
+    ANIMAL_REMOVE("animal:remove"),
+
+    ANIMAL_REFERENCE_MANAGE("animalReference:manage"),
+
+    VETERINARY_READ("veterinary:read"),
+    VETERINARY_ASSIGN("veterinary:assign"),
+    VETERINARY_MANAGE("veterinary:manage"),
+
+    POST_READ("post:read"),
+    POST_CREATE("post:create"),
+    POST_EDIT("post:edit"),
+    POST_REMOVE("post:remove"),
+
+    FOSTERHOME_READ("fosterhome:read"),
+    FOSTERHOME_EDIT("fosterhome:edit"),
+    FOSTERHOME_CREATE("fosterhome:create"),
+    FOSTERHOME_REMOVE("fosterhome:remove"),
+
+    REPORT_READ("report:read"),
+    REPORT_CREATE("report:create"),
+    REPORT_EDIT("report:edit");
+
+    private final String permission;
+
+    Permission(String permission) {
+        this.permission = permission;
+    }
+
+    public String getPermission() {
+        return permission;
+    }
+}
